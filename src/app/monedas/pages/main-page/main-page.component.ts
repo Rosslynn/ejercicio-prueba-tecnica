@@ -56,9 +56,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.mySubjectFlag)
       ).subscribe(() => {
-        if (!this.formMonedas.get('symbols')?.value) {
-          this.result = undefined;
-        }
+        this.result = undefined;
 
         if (this.formMonedas.invalid) {
           this.formMonedas.markAllAsTouched();
