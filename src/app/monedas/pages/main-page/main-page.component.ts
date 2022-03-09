@@ -14,7 +14,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   model!: NgbDateStruct;
   mySubjectFlag: Subject<boolean> = new Subject<boolean>();
-  @ViewChild('inputDate') inputDate!: ElementRef;
   formMonedas: FormGroup = this.fb.group({
     date: [, [Validators.required]],
     symbols: [, [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
