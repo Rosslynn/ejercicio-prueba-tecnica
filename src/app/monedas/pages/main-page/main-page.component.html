@@ -1,0 +1,37 @@
+<h1 clasS="my-2">Prueba Técnica</h1>
+<hr>
+<form [formGroup]="formMonedas" class="row py-2 flex-column">
+  <!-- Fecha -->
+  <div class="col-12 col-md-6 mb-3">
+    <label class="mb-1" for="euros">Seleccionar Fecha</label>
+    <div class="input-group">
+      <input #datepicker="ngbDatepicker" class="form-control" [startDate]="{year: 2022, month:10, day:19}" [maxDate]="{year, month, day}" name="datepicker"
+        formControlName="date" ngbDatepicker (click)="datepicker.toggle()" placeholder="YYYY-mm-dd" />
+      <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"><i
+          class="bi bi-calendar"></i>
+      </button>
+    </div>
+    <span class="text-danger" *ngIf="checkControlRequiredError('date')">La fecha es obligatoria</span>
+  </div>
+  <!-- Cantidad de euros a convertir -->
+  <div class="col-12 col-md-6  mb-3">
+    <label class="mb-1" for="euros">Cantidad de euros</label>
+    <input formControlName="amount" type="number" name="euros" class="form-control" placeholder="Euros">
+    <span class="text-danger" *ngIf="checkControlMinError('amount')">La cantidad mínima a convertir es 1 euro.</span>
+    <span class="text-danger" *ngIf="checkControlRequiredError('amount')">La cantidad a convertir es obligatoria</span>
+  </div>
+  <!-- Moneda a la que se convertirán los euros -->
+  <div class="col-12 col-md-6">
+    <label class="mb-1" for="euros">Moneda a la que se convertirán los euros</label>
+    <select formControlName="symbols" class="form-select">
+      <option value="" selected>-- Seleccionar --</option>
+      <option [value]="option" *ngFor="let option of conversionOptions">{{ option }}</option>
+    </select>
+    <span class="text-danger" *ngIf="checkControlRequiredError('symbols')">La moneda a la que se convertirán los euros es obligatoria</span>
+  </div>
+
+</form>
+<hr>
+<div>
+  <strong>Resultado: </strong> {{ result }} <span *ngIf="result">{{formMonedas.get('symbols')?.value}}</span>
+</div>
